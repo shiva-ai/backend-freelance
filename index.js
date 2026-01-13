@@ -92,7 +92,7 @@ app.get('/google/callback' , passport.authenticate("google" , {session : false})
         maxAge: 60*60*1000,
     })
 
-    res.redirect("http://localhost:3000/")
+    res.redirect("https://frontend-freelance-one.vercel.app/")
 } )
 
 app.post('/signup' , async (req, res) => {
