@@ -145,7 +145,7 @@ app.post('/login' , async (req , res) => {
         res.cookie("token" , newToken , {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production", // https only in prod
-            sameSite: "strict", // or "lax"
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // or "lax"
             maxAge: 60*60*1000 // 1hr 
         } )
         .json({
@@ -165,7 +165,7 @@ app.post('/login' , async (req , res) => {
 app.post('/logout' , (req, res) => {
     res.clearCookie("token" , {
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         secure: process.env.NODE_ENV === "production"
     }).json({msg : "logout success"})
 })
